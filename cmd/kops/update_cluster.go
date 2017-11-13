@@ -197,6 +197,7 @@ func RunUpdateCluster(f *util.Factory, clusterName string, out io.Writer, c *Upd
 		}
 		for i := range list.Items {
 			instanceGroups = append(instanceGroups, &list.Items[i])
+
 		}
 	}
 

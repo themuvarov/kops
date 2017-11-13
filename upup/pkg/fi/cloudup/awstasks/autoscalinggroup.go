@@ -43,6 +43,7 @@ type AutoscalingGroup struct {
 	MaxSize *int64
 	Subnets []*Subnet
 	Tags    map[string]string
+	PlacementGroupName *string
 
 	LaunchConfiguration *LaunchConfiguration
 }
@@ -183,6 +184,7 @@ func (_ *AutoscalingGroup) RenderAWS(t *awsup.AWSAPITarget, a, e, changes *Autos
 		request.LaunchConfigurationName = e.LaunchConfiguration.ID
 		request.MinSize = e.MinSize
 		request.MaxSize = e.MaxSize
+		request.PlacementGroup = e.PlacementGroupName
 
 		var subnetIDs []string
 		for _, s := range e.Subnets {

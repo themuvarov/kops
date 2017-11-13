@@ -231,6 +231,9 @@ func (_ *Instance) RenderAWS(t *awsup.AWSAPITarget, a, e, changes *Instance) err
 			},
 		}
 
+		//groupName := "mu"
+		//request.Placement.GroupName = & groupName
+
 		// Build up the actual block device mappings
 		// TODO: Support RootVolumeType & RootVolumeSize (see launchconfiguration)
 		blockDeviceMappings, err := buildEphemeralDevices(e.InstanceType)

@@ -187,6 +187,10 @@ func (b *AutoscalingGroupModelBuilder) Build(c *fi.ModelBuilderContext) error {
 			t.MinSize = i64(int64(minSize))
 			t.MaxSize = i64(int64(maxSize))
 
+			if ig.Spec.PlacementGroupName != "" {
+				t.PlacementGroupName = s(ig.Spec.PlacementGroupName)
+			}
+
 			subnets, err := b.GatherSubnets(ig)
 			if err != nil {
 				return err

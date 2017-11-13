@@ -43,7 +43,7 @@ func CreateClusterConfig(clientset simple.Clientset, cluster *api.Cluster, group
 	}
 
 	for _, ig := range groups {
-		_, err = clientset.InstanceGroupsFor(cluster).Create(ig)
+		_, err := clientset.InstanceGroupsFor(cluster).Create(ig)
 		if err != nil {
 			return fmt.Errorf("error writing updated instancegroup configuration: %v", err)
 		}

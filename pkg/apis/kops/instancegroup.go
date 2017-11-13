@@ -67,6 +67,7 @@ type InstanceGroupSpec struct {
 	Image   string `json:"image,omitempty"`
 	MinSize *int32 `json:"minSize,omitempty"`
 	MaxSize *int32 `json:"maxSize,omitempty"`
+	PlacementGroupName string `json:"placementGroupName,omitempty`
 	//NodeInstancePrefix string `json:",omitempty"`
 	//NodeLabels         string `json:",omitempty"`
 	MachineType string `json:"machineType,omitempty"`

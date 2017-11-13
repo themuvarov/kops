@@ -78,6 +78,7 @@ type CreateClusterOptions struct {
 	NodeSecurityGroups   []string
 	MasterSecurityGroups []string
 	AssociatePublicIP    *bool
+	PlacementGroupName   string
 
 	// Channel is the location of the api.Channel to use for our defaults
 	Channel string
@@ -283,6 +284,8 @@ func NewCmdCreateCluster(f *util.Factory, out io.Writer) *cobra.Command {
 	cmd.Flags().StringVar(&options.NodeTenancy, "node-tenancy", options.NodeTenancy, "The tenancy of the node group on AWS. Can be either default or dedicated.")
 
 	cmd.Flags().StringVar(&options.APILoadBalancerType, "api-loadbalancer-type", options.APILoadBalancerType, "Sets the API loadbalancer type to either 'public' or 'internal'")
+
+	cmd.Flags().StringVar(&options.PlacementGroupName, "placement-group", options.PlacementGroupName, "Placement group to use")
 
 	if featureflag.VSphereCloudProvider.Enabled() {
 		// vSphere flags
@@ -537,6 +540,12 @@ func RunCreateCluster(f *util.Factory, out io.Writer, c *CreateClusterOptions) e
 	if c.NodeSize != "" {
 		for _, group := range nodes {
 			group.Spec.MachineType = c.NodeSize
+		}
+	}
+
+	if c.PlacementGroupName != "" {
+		for _, group := range instanceGroups {
+			group.Spec.PlacementGroupName = c.PlacementGroupName
 		}
 	}
 
